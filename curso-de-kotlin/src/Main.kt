@@ -72,4 +72,34 @@ fun main(args: Array<String>) {
         println("range 2 -> $i")
     }
 
+
+
+    sayHello("joão")
+    sumTwoNumbers(2,2)
+    sumTwoNumbers(3.5, 5.5)
+}
+
+// function declaration
+// unit is the void like in kotlin
+fun sayHello (name: String, age: String = "Not Specified"):Unit {
+    println("Hello $name, your age is: $age")
+}
+// return declarations
+fun sumTwoNumbers(x:Int, y: Int):Int {
+    val z = x+y
+    return z
+}
+
+/*
+    Function overloading
+    is a powerful feature that allows you
+    to define multiple functions with the
+    same name but different parameters. Then the kotlin compiler decides which version of
+    the function to call based on the arguments provided.
+ */
+
+fun sumTwoNumbers(x:Double, y: Double):Double {
+    val z = x+y
+    println("second function")
+    return z
 }
