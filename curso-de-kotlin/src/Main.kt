@@ -1,3 +1,5 @@
+import GeneralRobot as GeneralRobot
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main(args: Array<String>) {
@@ -74,32 +76,142 @@ fun main(args: Array<String>) {
 
 
 
-    sayHello("joão")
-    sumTwoNumbers(2,2)
-    sumTwoNumbers(3.5, 5.5)
-}
-
-// function declaration
+    // function declaration
 // unit is the void like in kotlin
-fun sayHello (name: String, age: String = "Not Specified"):Unit {
-    println("Hello $name, your age is: $age")
-}
-// return declarations
-fun sumTwoNumbers(x:Int, y: Int):Int {
-    val z = x+y
-    return z
+    fun sayHello(name: String, age: String = "Not Specified"): Unit {
+        println("Hello $name, your age is: $age")
+    }
+
+    // return declarations
+    fun sumTwoNumbers(x: Int, y: Int): Int {
+        val z = x + y
+        return z
+    }
+
+    /*
+        Function overloading
+        is a powerful feature that allows you
+        to define multiple functions with the
+        same name but different parameters. Then the kotlin compiler decides which version of
+        the function to call based on the arguments provided.
+     */
+
+    fun sumTwoNumbers(x: Double, y: Double): Double {
+        val z = x + y
+        println("second function")
+        return z
+    }
+
+
+    sayHello("joão")
+    sumTwoNumbers(2, 2)
+    sumTwoNumbers(3.5, 5.5)
+
+    // CLASSES ---------------------------------------------------------
+    /*
+        class SimpleRobot( name: String): GeneralRobot(name) {
+            fun tornOnLight() {
+                println("The light is on!")
+            }
+        }
+
+        class SupaDupaRobot( name: String): GeneralRobot(name) {
+            fun savesTheWorld() {
+                println("I'LL SAVE THE WORLD")
+            }
+        }
+
+
+        val robert = SimpleRobot("Robert")
+        val metatron = SupaDupaRobot("Metatron")
+        robert.tornOnLight()
+        robert.walk()
+        robert.speak("Oh hiiiiiinnnn")
+        metatron.savesTheWorld()
+        robert.speak("Metraton smash")
+
+        */
+
+
+    // AFTER ADDING ONE MORE CONSTRUCTOR, THOSE CLASSES NEED TO BE REFACTORED
+    class SimpleRobot : GeneralRobot {
+        constructor(name: String, modelYear: String) : super(name, modelYear)
+        constructor(name: String) : super(name)
+
+        fun tornOnLight() {
+            println("The light is on!")
+        }
+    }
+
+    class SupaDupaRobot: GeneralRobot {
+        constructor(name: String, modelYear: String) : super(name, modelYear)
+        constructor(name: String) : super(name)
+
+        fun savesTheWorld() {
+            println("I'LL SAVE THE WORLD")
+        }
+    }
+
+
+    val robert = SimpleRobot("Robert", "2024")
+    val metatron = SupaDupaRobot("Metatron")
+    robert.tornOnLight()
+    robert.walk()
+    robert.speak("Oh hiiiiiinnnn")
+    metatron.savesTheWorld()
+    robert.speak("Metraton smash")
+
+
+    val vegetables = mutableListOf<String>("BANANA", "4")
+    println(vegetables)
+    vegetables.add("carrots")
+    println(vegetables)
+    vegetables.removeAt(0)
+    println(vegetables)
+
+    // update values
+    vegetables[0] = "onions"
+    println(vegetables)
+
+    // ArrayList
+    val colors = arrayListOf("RED", "GREEN", 1,"RED")
+    println(colors)
+    colors.add("BLUE")
+    println(colors)
+    colors.removeAt(0)
+    println(colors)
+
+    //set
+    //immutable sets no duplicates allowed and is read-only
+    val colorsset = setOf("RED", "GREEN","RED")
+    println(colorsset)
+
+    //mutable set no duplicates allowed but can be modified
+    val mutableSetOfColors = mutableSetOf("RED", "GREEN","RED")
+    println(mutableSetOfColors)
+    mutableSetOfColors.add("BLUE")
+    println(mutableSetOfColors)
+
+
+    // map
+    // key-value pairs - like objects in javascript
+    //immutable maps no duplicates allowed and is read-only
+
+    val fruitsMaps = mapOf("apple" to 5, "banana" to 10)
+    println(fruitsMaps)
+    val quantityOfBananas = fruitsMaps["banana"]
+    //val quantityOfBananas = fruitsMaps.get("apple")
+    println("the quantity of bananas is $quantityOfBananas")
+
+    val mapOfVegetables = mutableMapOf<String, Double>("carrots" to 5.0, "onions" to 10.0)
+    println(mapOfVegetables)
+    mapOfVegetables["pepper"] = 20.0
+    println(mapOfVegetables)
+    val quantityOfCarrots = mapOfVegetables["carrots"]
+    println("the quantity of carrots is $quantityOfCarrots")
+    mapOfVegetables.put("beans", 60.0)
+    mapOfVegetables["pepper"] = 2.0
+    println(mapOfVegetables)
+
 }
 
-/*
-    Function overloading
-    is a powerful feature that allows you
-    to define multiple functions with the
-    same name but different parameters. Then the kotlin compiler decides which version of
-    the function to call based on the arguments provided.
- */
-
-fun sumTwoNumbers(x:Double, y: Double):Double {
-    val z = x+y
-    println("second function")
-    return z
-}
