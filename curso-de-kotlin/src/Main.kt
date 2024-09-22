@@ -143,7 +143,7 @@ fun main(args: Array<String>) {
         }
     }
 
-    class SupaDupaRobot: GeneralRobot {
+    class SupaDupaRobot : GeneralRobot {
         constructor(name: String, modelYear: String) : super(name, modelYear)
         constructor(name: String) : super(name)
 
@@ -174,7 +174,7 @@ fun main(args: Array<String>) {
     println(vegetables)
 
     // ArrayList
-    val colors = arrayListOf("RED", "GREEN", 1,"RED")
+    val colors = arrayListOf("RED", "GREEN", 1, "RED")
     println(colors)
     colors.add("BLUE")
     println(colors)
@@ -183,11 +183,11 @@ fun main(args: Array<String>) {
 
     //set
     //immutable sets no duplicates allowed and is read-only
-    val colorsset = setOf("RED", "GREEN","RED")
+    val colorsset = setOf("RED", "GREEN", "RED")
     println(colorsset)
 
     //mutable set no duplicates allowed but can be modified
-    val mutableSetOfColors = mutableSetOf("RED", "GREEN","RED")
+    val mutableSetOfColors = mutableSetOf("RED", "GREEN", "RED")
     println(mutableSetOfColors)
     mutableSetOfColors.add("BLUE")
     println(mutableSetOfColors)
@@ -213,5 +213,78 @@ fun main(args: Array<String>) {
     mapOfVegetables["pepper"] = 2.0
     println(mapOfVegetables)
 
-}
+    // basic lambda expression: {parameters -> body}
+    // type 1 - with parameters and return type
+    val add: (Int, Int) -> Int = { a, b -> a + b }
+    // uma constante que recebe uma expressão lambda que tem recebe dois argumentos que são do tipo
+    // inteiro. A função retorna um resultado do tipo inteiro que é a soma dos argumentos
+    var result = add(5, 4)
+    println(result)
 
+    // 2 - with parameters and no return value
+    val add2: (Int, Int) -> Unit = { a, b -> println(a + b) }
+    add2(5, 4)
+    //Unit é o tipo de retorno em Kotlin, unit é semelhante a void em outras linguagens, e significa que
+    //a expressão lambda não retorna nenhum valor completo significativo, portanto, não há valor
+
+    //3 - No parameters but with return value
+    val add3: () -> String = { "Welcome to New York, it's been waiting for you!" }
+    println(add3())
+    add3() // no return because it is type string
+    var result2 = add3()
+    println(result2)
+
+    // 4 - no parameters and no return value
+    val add4: () -> Unit = { println("no parameters and no return value") }
+    add4()
+    println(add4())
+
+    // Direct use of lambda expressions
+    println({ a: Int, b: Int -> a + b }(5, 4))
+
+
+    // anonymous function
+    val numbers = listOf(1, 2, 3, 4, 5)
+    val squareAnonymous = fun(x: Int): Int {
+        return x * x
+    }
+
+    val squaredNumbers = numbers.map(squareAnonymous)
+    println(squaredNumbers)
+
+    // types of anonymous functions
+    val multiply = fun(a: Int, b: Int): Int { return a * b }
+    println(multiply(5, 4))
+    println(multiply.invoke(5, 4))
+
+
+    // with parameters and no return value
+    val multiply2 = fun(a: Int, b: Int) { println("" + a * b) }
+    multiply2(5, 5)
+
+    // no parameters and return value
+    val msg = fun(): String { return "Welcome to New York, it's been waiting for you!" }
+    println(msg())
+
+    // no parameters and no return value
+    val msg2 = fun(): Unit { println("no parameters and no return value") }
+    msg2()
+
+
+    // higher-order functions: accept one or more functions as parameters can retur a function as a result
+
+    fun operateOnNumbers(a: Int, b: Int, operation: (Int, Int) -> Int): Int {
+        // this function has 3 parameters 2 int and 1 function which takes 2 ints and returns an int
+        return operation(a, b) //usando os 2 argumentos na function
+    }
+
+    val addResult = operateOnNumbers(5, 4) { a, b -> a + b }
+    val multiplyResult = operateOnNumbers(5, 4) { a, b -> a * b }
+    println("the result of the add operation is $addResult")
+    println("the result of the multiply operation is $multiplyResult")
+
+
+    // it operator
+    val squaredNumbers2 = numbers.map { it * it }
+    println(squaredNumbers2)
+}
